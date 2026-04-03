@@ -40,10 +40,30 @@ jobs:
           name: build-output
           path: agrikon_frontend/dist 
           retention-days: 1
-  
+
+  # --- NEW SEPARATE SECURITY JOB ---
+  security_scan:
+    name: Security Scan (Trivy)
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: 'fs'
+          scan-ref: 'agrikon_frontend' 
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
   artifact:
     name: Archive Build
-    needs: build
+    needs: [build, security_scan]
     runs-on: ubuntu-latest
     steps:
       - name: Download Build Output
