@@ -2,7 +2,7 @@ name: Agrikon CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 permissions:
   contents: read
