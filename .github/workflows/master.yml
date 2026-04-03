@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@57a97c7d425f6ed4964645229ed5b721e7d8122a
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           scan-type: 'fs'
           scan-ref: 'agrikon_frontend' 
