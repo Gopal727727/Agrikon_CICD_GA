@@ -1,0 +1,19 @@
+.custom-row-bg {
+  background-color: #e1fffd !important; /* Keep background */
+  text-align: center; /* Align text horizontally */
+  vertical-align: middle;
+}
+
+th {
+  text-align: center;
+}
+
+label{
+  color: black;
+}
+
+
+.table {
+  border-spacing: 0 30px; /* Horizontal and vertical spacing between rows */
+  border-collapse: separate; /* Ensure border-spacing works */
+}

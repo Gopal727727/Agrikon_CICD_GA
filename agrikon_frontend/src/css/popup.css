@@ -1,0 +1,18 @@
+.popup
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0, 0, 0.2);
+    overflow-y: auto;
+   
+}
+.popup-inner {
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 800px; /* Increase this value to make the popup wider */
+    background-color: #fff;
+}

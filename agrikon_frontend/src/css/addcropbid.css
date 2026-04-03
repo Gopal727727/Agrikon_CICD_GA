@@ -1,0 +1,62 @@
+.custom-width{
+    width:70vh;
+}
+
+h2{
+    font-weight: bold;
+}
+
+.smalltext{
+    color: black;
+    font-size: 12px;
+}
+
+h3{
+    text-decoration: underline;
+    text-decoration-color: rgb(231, 175, 70);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .modal-header {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-buttons button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    width: 100px;
+    border-radius: 20px;
+  }
+  
+  .yes-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .no-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  

@@ -1,0 +1,59 @@
+/* General styling for nav links */
+.navbar-nav .nav-link{
+  position: relative;
+  display: inline-block;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding-bottom: 5px; 
+}
+
+.white-icon{
+  color:white
+}
+
+hr{
+  color: white;
+}
+/* Animated hover underline effect */
+.navbar-nav .nav-link:not(.dropdown-toggle)::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px; /* Thickness of the line */
+  bottom: 0;
+  left: 0;
+  background-color: orange; /* Color of the line */
+  transition: width 0.3s ease; 
+}
+
+
+.navbar-nav .nav-link:not(.dropdown-toggle):hover::after {
+  width: 100%;
+}
+
+
+.dropdown-menu .dropdown-item {
+  color: black !important; 
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease; 
+}
+
+
+.dropdown-menu .dropdown-item:hover {
+  color: rgb(240, 190, 98);
+  background-color: rgba(0, 0, 0, 0.1); 
+}
+
+/* Override styles for the Root component */
+.navbar-root .navbar-nav .nav-link {
+  color: black !important;
+}
+
+.navbar-root .white-icon {
+  color: black !important;
+}
+
+.navbar-root hr{
+  color: black !important;
+}

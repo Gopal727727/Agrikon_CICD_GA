@@ -1,0 +1,105 @@
+/* Farmer Dashboard Navigation */
+
+.farmerdashnav {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+  }
+  
+  /* Logo Section */
+  .farmerdashnav-logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .farmerdashnav-logo-img {
+    width: 202px;
+    height: 61px;
+  }
+  
+  /* Main Section */
+  .farmerdashnav-main {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  
+  /* Dashboard Heading */
+  .farmerdashnav-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+  
+  /* Search Bar */
+  .farmerdashnav-search {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .farmerdashnav-search-input {
+    width: 100%;
+  
+    border-radius: 20px;
+    padding: 8px 16px;
+  }
+  
+  .farmerdashnav-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff; /* Blue color for the search icon */
+    font-size: 1.2rem;
+  }
+  
+  /* Right Section */
+  .farmerdashnav-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .farmerdashnav-lang-btn {
+    border: none; /* No border */
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+  }
+  
+  .farmerdashnav-flag-img {
+    width: 20px; /* Adjust flag size */
+    height: 20px;
+    margin-right: 5px;
+  }
+  
+  .farmerdashnav-lang-menu {
+    border-radius: 10px;
+    padding: 5px;
+  }
+  
+  .farmerdashnav-notification-btn {
+    font-size: 1.5rem; /* Adjusted icon size */
+  }
+  
+  .farmerdashnav-notification-icon {
+    font-size: 1.5rem; /* Increased size for bell icon */
+  }
+  
+  .farmerdashnav-user-img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .farmerdashnav-user-info h6 {
+    margin: 0;
+  }
+  
+  .farmerdashnav-user-info small {
+    color: #6c757d;
+  }
+  

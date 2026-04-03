@@ -1,0 +1,71 @@
+.bouncy-dot {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  .agriimportance {
+    background-color: #f0f8ff;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .agriimportance .large-image {
+    width: 450px;
+    height: 450px;
+    object-fit: cover;
+  }
+  
+  .agriimportance .small-image {
+    width: 200px;
+    height: 200px;
+    top: -10px; /* Move upwards to overlap the top */
+    left: -10px; /* Move leftwards to be partially outside the large image */
+    object-fit: cover;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .agriimportance .orange-dot {
+    width: 30px;
+    height: 30px;
+    background-color: #ff8418;
+    bottom: -60px; /* Position below the large image */
+    left: 50px; /* Adjust horizontal position */
+  }
+  
+  .agriimportance .small-logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .agriimportance .circle-percentage {
+    border: 2px solid #28a745;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .agriimportance .percentage-value {
+    color: #28a745;
+  }
+  
+  .agriimportance .learn-more-button {
+    background-color: #ff8418;
+  }
+  .gradient-text {
+   
+    font-weight: bold;
+    background: linear-gradient(to right, red, purple, blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }

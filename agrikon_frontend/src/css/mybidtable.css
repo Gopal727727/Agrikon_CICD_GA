@@ -1,0 +1,131 @@
+/* Wrapper for the table to control width and margin */
+.table-wrapper {
+  width: 100%; /* Set width to 90% */
+  margin: 0 auto; /* Center the table horizontally */
+  padding: 0 5%; /* Add 5% padding on the left and right */
+}
+
+.crop-table {
+  width: 100%; /* Ensure the table takes the full width of its container */
+  border-spacing: 0 30px; /* Horizontal and vertical spacing between rows */
+  border-collapse: separate; /* Ensure border-spacing works */
+}
+
+.crop-thead {
+  text-align: center;
+  font-size: 16px;
+}
+
+.crop-thead > tr > th {
+  background-color: #6e6e6e !important;
+  color: #ffffff !important;
+  padding: 10px;
+}
+
+.crop-row-bg {
+  background-color: #d9d9d9 !important; /* Keep background */
+  text-align: center; /* Align text horizontally */
+  vertical-align: middle;
+}
+
+.open-btn {
+  background-color: #4AA760;
+  border-radius: 20px;
+  width: 100px;
+}
+
+.open-btn:hover {
+  background-color: #39974f;
+}
+.close-btn {
+  background-color: #f06767;
+  border-radius: 20px;
+  width: 100px;
+}
+
+.close-btn:hover {
+  background-color: #e40b0b;
+}
+
+hr {
+  color: black !important;
+}
+
+.h2center {
+  text-align: center !important;
+}
+
+tbody>tr>td{
+  padding: 20px;
+}
+
+.spacing {
+  margin-left: 5%;
+}
+
+.see:hover{
+  background-color: #b66c05 !important;
+}
+
+.bid:hover{
+ background-color: #055fad !important;
+}
+
+/* Top section layout */
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5vh;
+}
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 350px;
+  height: 60px;
+  background-color: #fff;
+  border: 1px solid #bebebe;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.search-icon {
+  color: #bebebe;
+  margin-right: 10px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  font-weight: bolder;
+  color: #bebebe;
+}
+
+/* Sort By Section */
+.sort-container {
+  display: flex;
+  align-items: center;
+}
+
+.sort-label {
+  font-weight: bold;
+  color: #000000;
+  margin-right: 10px;
+}
+
+.sort-select {
+  border: 1px solid #bebebe;
+  border-radius: 10px;
+  background-color: #fff;
+  height: 60px;
+  color: #bebebe;
+  padding: 5px 10px;
+  outline: none;
+  font-size: 14px;
+}

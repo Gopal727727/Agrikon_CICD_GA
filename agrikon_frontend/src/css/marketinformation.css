@@ -1,0 +1,116 @@
+/* Overall container styling */
+.marketinfo-container {
+    padding: 20px;
+    background-color: #f0f8ff;
+    min-height: 100vh;
+}
+
+/* Header styling */
+.marketinfo-header {
+    margin-bottom: 20px;
+}
+
+.marketinfo-title {
+    font-weight: bold;
+}
+
+.marketinfo-btn {
+    background-color: #ff8800;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Show and Sort By Fields styling */
+.marketinfo-controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px; /* Reduced spacing between fields */
+    align-items: center; /* Ensures proper vertical alignment */
+}
+
+.marketinfo-controls label {
+    font-weight: bold;
+}
+
+.marketinfo-select {
+    width: 120px; /* Adjusted width for better readability */
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+/* Card styling */
+.marketinfo-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.marketinfo-placeholder {
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Chart title */
+.marketinfo-chart-title {
+    font-weight: bold;
+}
+
+/* Chart container */
+.marketinfo-chart-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.marketinfo-chart {
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.marketinfo-bar {
+    width: 40px;
+    background-color: #4a90e2;
+    border-radius: 4px;
+}
+
+.marketinfo-bar-jan {
+    height: 50px;
+}
+
+.marketinfo-bar-feb {
+    height: 120px;
+}
+
+.marketinfo-bar-mar {
+    height: 70px;
+}
+
+.marketinfo-bar-apr {
+    height: 100px;
+}
+
+.marketinfo-bar-may {
+    height: 40px;
+}
+
+.marketinfo-bar-jun {
+    height: 150px;
+}
+
+.marketinfo-months {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.marketinfo-months span {
+    text-align: center;
+}

@@ -1,0 +1,45 @@
+.hover-scale {
+    background-color: #ff8418;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.3); 
+    background-color: #ff8418; 
+    color: white; 
+    border: 1px solid white;
+  }
+  
+
+.carouselarrow {
+  background-color: white;
+  border: none;
+  width: 40px; 
+  height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; 
+  color: black; 
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.carouselarrow:hover {
+  color: #ff8418;
+}
+
+
+.carousel .control-dots {
+  display: none !important;  
+}
+
+.carousel .thumbs-wrapper {
+  display: none !important;  
+}
