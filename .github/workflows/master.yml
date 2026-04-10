@@ -17,15 +17,15 @@ jobs:
         working-directory: agrikon_frontend
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4 
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm' 
+          cache: 'npm'
           cache-dependency-path: agrikon_frontend/package-lock.json
 
       - name: Install dependencies
@@ -38,23 +38,105 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: agrikon_frontend/dist 
+          path: agrikon_frontend/dist
           retention-days: 1
 
-  # --- NEW SEPARATE SECURITY JOB ---
-  security_scan:
-    name: Security Scan (Trivy)
+  frontend_security_scan:
+    name: Frontend security (Trivy)
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@v0.35.0
+      - name: Run Trivy on frontend
+        uses: aquasecurity/trivy-action@0.28.0
         with:
           scan-type: 'fs'
-          scan-ref: 'agrikon_frontend' 
+          scan-ref: 'agrikon_frontend'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+  backend_build:
+    name: Backend build (Django)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: Backend/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check Django config
+        run: python manage.py check --deploy
+        env:
+          DJANGO_SETTINGS_MODULE: ${{ vars.DJANGO_SETTINGS_MODULE }}
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+  backend_test:
+    name: Backend tests
+    needs: backend_build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: Backend/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests with coverage
+        run: |
+          pip install pytest pytest-django pytest-cov
+          pytest --cov=. --cov-report=xml --cov-fail-under=70
+        env:
+          DJANGO_SETTINGS_MODULE: ${{ vars.DJANGO_SETTINGS_MODULE }}
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: Backend/coverage.xml
+          retention-days: 7
+
+  backend_security_scan:
+    name: Backend security (Trivy)
+    needs: backend_build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy on backend 
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          scan-ref: 'Backend'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
@@ -62,23 +144,23 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
   artifact:
-    name: Archive Build
-    needs: [build, security_scan]
+    name: Archive build
+    needs: [build, frontend_security_scan, backend_test, backend_security_scan]
     runs-on: ubuntu-latest
     steps:
-      - name: Download Build Output
+      - name: Download build output
         uses: actions/download-artifact@v4
         with:
           name: build-output
           path: dist
 
-      - name: Upload Pages Artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/
-  
+
   deploy:
-    name: Deploy to githubpages
+    name: Deploy to GitHub Pages
     needs: artifact
     runs-on: ubuntu-latest
     environment:
