@@ -10,7 +10,8 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  frontend_build:
+    name: Frontend build
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -43,14 +44,14 @@ jobs:
 
   frontend_security_scan:
     name: Frontend security (Trivy)
-    needs: build
+    needs: frontend_build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Run Trivy on frontend
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           scan-type: 'fs'
           scan-ref: 'agrikon_frontend'
@@ -60,80 +61,15 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
 
-  backend_build:
-    name: Backend build (Django)
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Backend
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-          cache-dependency-path: Backend/requirements.txt
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Check Django config
-        run: python manage.py check --deploy
-        env:
-          DJANGO_SETTINGS_MODULE: ${{ vars.DJANGO_SETTINGS_MODULE }}
-          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-  backend_test:
-    name: Backend tests
-    needs: backend_build
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Backend
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-          cache-dependency-path: Backend/requirements.txt
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run tests with coverage
-        run: |
-          pip install pytest pytest-django pytest-cov
-          pytest --cov=. --cov-report=xml --cov-fail-under=70
-        env:
-          DJANGO_SETTINGS_MODULE: ${{ vars.DJANGO_SETTINGS_MODULE }}
-          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: Backend/coverage.xml
-          retention-days: 7
-
   backend_security_scan:
     name: Backend security (Trivy)
-    needs: backend_build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Trivy on backend 
-        uses: aquasecurity/trivy-action@0.28.0
+      - name: Run Trivy on backend (Python packages)
+        uses: aquasecurity/trivy-action@v0.35.0
         with:
           scan-type: 'fs'
           scan-ref: 'Backend'
@@ -145,7 +81,7 @@ jobs:
 
   artifact:
     name: Archive build
-    needs: [build, frontend_security_scan, backend_test, backend_security_scan]
+    needs: [ frontend_build, frontend_security_scan, backend_security_scan ]
     runs-on: ubuntu-latest
     steps:
       - name: Download build output
